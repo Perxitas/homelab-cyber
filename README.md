@@ -23,7 +23,7 @@ Internet
 
 ## Stack
 
-| Componente |
+| Componente | Software |
 |---|---|
 | Hypervisor | VirtualBox |
 | Firewall | pfSense 2.8.1 CE |
