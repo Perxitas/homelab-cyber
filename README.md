@@ -23,15 +23,15 @@ Internet
 
 ## Stack
 
-| Componente |
-|
+| Componente | Software |
+|---|---|
 | Hypervisor | VirtualBox |
 | Firewall | pfSense 2.8.1 CE |
 | Client / Pentesting | Kali Linux 2026.2 |
 
 ## Proyectos
 
-| # | Proyecto | Estado |
+| Paso | Proyecto | Estado |
 |---|---|---|
 | 01 | [Configuración pfSense + red interna](configuracion-pfsense.md) | Completado |
 

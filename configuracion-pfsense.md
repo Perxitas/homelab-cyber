@@ -39,7 +39,7 @@ Internet (WAN)
 
 Acceso desde Kali: `http://192.168.1.1`.
 
-| Parámetro | Valor |
+| Parámetro | Valor/Nombres |
 |---|---|
 | Hostname | pfsense-homelab |
 | Domain | homelab.lan |
