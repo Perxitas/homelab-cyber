@@ -27,11 +27,11 @@ Luego, en Services > Suricata > Interfaces, añadimos una nueva interfaz, la int
 ## Prueba
 De manera inicial, un comando básico, nmap -sS -A 192.168.1.1 para obtener alertas en nuestro log de Alerts en Suricata. 
 
-![Alertas Suricata](img/suricata-alertas1.png)
+![Alertas Suricata](imgs/suricata-alertas1.png)
 
 -Se pueden observar que las primeras fueron de los paquetes ICMP para el descubrimiento de hosts, que suricata no reconoce.
 
-![Alertas Suricata](img/suricata-alertas0.png)
+![Alertas Suricata](imgs/suricata-alertas0.png)
 
 -También estuvo entremedio de las alertas una de tipo Applayer detect protocol only one direction, esto se debe a que nmap con el -sS, no completa el handshake. Por lo tanto Suricata ve tráfico en 1 sola direccion, no llegando a capturar el protocolo.
 
