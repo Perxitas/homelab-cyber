@@ -39,7 +39,7 @@ Internet (WAN)
 
 Acceso desde Kali: `http://192.168.1.1`.
 
-| Parámetro |
+| Parámetro | Valor |
 |---|---|
 | Hostname | pfsense-homelab |
 | Domain | homelab.lan |
@@ -54,4 +54,4 @@ pfSense actúa como un firewall perimetral, separando la red WAN (internet) de l
 
 ## Próximo paso
 
-Configurar reglas de firewall, segmentación con VLANs y añadir Suricata como IDS/IPS.
+[ ] Configurar reglas de firewall, segmentación con VLANs y añadir Suricata como IDS/IPS.
