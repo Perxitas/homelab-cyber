@@ -54,4 +54,4 @@ pfSense actúa como un firewall perimetral, separando la red WAN (internet) de l
 
 ## Próximo paso
 
-[ ] Configurar reglas de firewall, segmentación con VLANs y añadir Suricata como IDS/IPS.
+[1/3] Configurar reglas de firewall, segmentación con VLANs y añadir Suricata como IDS/IPS.

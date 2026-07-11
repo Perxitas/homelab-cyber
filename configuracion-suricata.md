@@ -27,18 +27,45 @@ Luego, en Services > Suricata > Interfaces, añadimos una nueva interfaz, la int
 ## Prueba
 De manera inicial, un comando básico, nmap -sS -A 192.168.1.1 para obtener alertas en nuestro log de Alerts en Suricata. 
 
-![Alertas Suricata](imgs/suricata-alertas1.png)
-
 -Se pueden observar que las primeras fueron de los paquetes ICMP para el descubrimiento de hosts, que suricata no reconoce.
+
+![Alertas Suricata](imgs/suricata-alertas1.png)
 
 ![Alertas Suricata](imgs/suricata-alertas0.png)
 
 -También estuvo entremedio de las alertas una de tipo Applayer detect protocol only one direction, esto se debe a que nmap con el -sS, no completa el handshake. Por lo tanto Suricata ve tráfico en 1 sola direccion, no llegando a capturar el protocolo.
 
 ## Próximo paso
-- [ ] Evaluar si emerging-scan detecta SYN scans puros o requiere ajuste de reglas
-- [ ] Se debe activar Block Offenders para que nuestra IDS pase a modo IPS y podamos realmente bloquear tráfico malicioso
+- [X] Evaluar si emerging-scan detecta SYN scans puros o requiere ajuste de reglas
+- [X] Se debe activar Block Offenders para que nuestra IDS pase a modo IPS y podamos realmente bloquear tráfico malicioso
 
 ## Observaciones
 - nmap -sS solo no generó alertas, requirió -A para ser alertado.
 - La alerta fue por el user agent HTTP de nmap, no por el SYN scan
+- Como update, no detectaba incluso modificando las reglas por que este solo estaba considerando como origen la external net, el cliente esta en lo que cabería como la home net. Al mismo tiempo la regla que sí detecta el agent de nmap, considera home net como origen
+
+## Activación IPS
+Se activó block offender bajo la configuración de la interfaz LAN, en modo inline, debido a que el modo legacy puede llegar a permitir que ciertos paquetes pasen por el firewall antes de hacerles drop.
+Block offender es lo que hace el cambio de IDS a IPS, es el cambio que hace que la interfaz según las reglas no actué solo alertando sobre tráfico sino que tome acción y bloquee las conexiones. Está bajo el modo inline, donde existe la excepción que hablaré más adelante la cual es que debemos especificar las reglas que recibiran este drop
+
+Para hacer que las reglas previamente utilizadas de ETOpen en vez de alertar simplemente, hagan drop, se creó un archivo .conf, para hacer una lista drop SID, en esta van dichas reglas de esta forma: 
+
+```conf
+dropsid.conf:
+ET-scan
+ET-exploit
+ET-malware
+```
+
+En la configuración de listas SID para interfaces, bajo la interfaz LAN, se colocó este archivo como la lista SID a bloquear 
+
+Aquí se puede observar 
+![Drops Suricata](imgs/suricata-drop0.png)
+
+## Observaciones IPS
+- Está tambien SURICATA Applayer mismatch protocol both directions, este significa que nmap intenta comunicarse con el protocolo HTTP (Se observa puerto 80 como source port) y los otros son puertos de Kali, Suricata al ver esta comuncación no entiende el protocolo de aplicación en ninguna dirección. En pocas palabras el contenido no cumple con lo que el protocolo dice, HTTP.
+- Aún así nmap sigue logrando el scan a pesar de que las conexiones son dropeadas, Esto se debe a que Suricata actúa sobre el contenido de los paquetes, no impide el descubrimiento inicial. Por lo tanto la siguiente iteración será ver reglas del firewall para bloquear el trafico no deseado antes de que llegue a suricata incluso..
+
+## Conclusión de transición IDS a IPS 
+La transición de IDS a IPS requiere criterio sobre qué se bloquea. En esta etapa se bloquearon las categorías ET-scan, ET-exploit y ET-malware de ETOpen pero aún falta validar que tráfico legítimo no se vea afectado eso es parte de la siguiente iteración. Debido a que saber que trafico bloquear y cual es lo que diferencia el buen uso del IPS.
+Suricata es utíl para bloquear contenido, pero aún así deja una brecha donde los usuarios aún pueden descubrir la red, se debe complementar. 

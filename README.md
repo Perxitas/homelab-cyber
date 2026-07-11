@@ -34,12 +34,13 @@ Internet
 | Paso | Proyecto | Estado |
 |---|---|---|
 | 01 | [Configuración pfSense + red interna](configuracion-pfsense.md) | Completado |
+| 02 | [Suricata IDS/IPS con reglas ETOpen](configuracion-suricata.md) | Completado |
 
 ## Objetivos a cumplir/Roadmap
 
 - [ ] Segmentación de red con VLANs
 - [ ] Reglas de firewall y hardening
-- [ ] IDS/IPS con Suricata
+- [X] IDS/IPS con Suricata
 - [ ] VM vulnerable para práctica de pentesting
 - [ ] Integración con cloud (AWS VPC)
 - [ ] Arquitectura Zero Trust
