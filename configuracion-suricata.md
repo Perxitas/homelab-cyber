@@ -1,4 +1,4 @@
-    # 01 — Setup Suricata en el firewall con reglas ETopen
+# 01 — Setup Suricata en el firewall con reglas ETopen
 
 ## Objetivo
 Activar el IDS de suricata y detectar alertas segun un set de reglas de ETopen, afinar reglas si es que se requiere para falsos positivos detectados por la IDS, para luego aplicar el IPS, bloqueando tráfico que sí lo requiere.
