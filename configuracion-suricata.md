@@ -1,21 +1,21 @@
-    # 01 — Setup Suricata en el firewall con reglas ETopen
+# 01 — Setup Suricata en el firewall con reglas ETopen
 
-    ## Objetivo
-    Activar el IDS de suricata y detectar alertas segun un set de reglas de ETopen, afinar reglas si es que se requiere para falsos positivos detectados por la IDS, para luego aplicar el IPS, bloqueando tráfico que sí lo requiere.
+## Objetivo
+Activar el IDS de suricata y detectar alertas segun un set de reglas de ETopen, afinar reglas si es que se requiere para falsos positivos detectados por la IDS, para luego aplicar el IPS, bloqueando tráfico que sí lo requiere.
 
-    ## ¿Que es Suricata?
-    Es un sistema IDS/IPS, esto significa que detecta y previene intrusos. Este es un paquete adicional para complementar con una inspección más a fondo de paquetes que lo que el firewall trae predeterminado.
+## ¿Que es Suricata?
+Es un sistema IDS/IPS, esto significa que detecta y previene intrusos. Este es un paquete adicional para complementar con una inspección más a fondo de paquetes que lo que el firewall trae predeterminado.
 
-    ## Instalación
-    Dentro de pfSense 
+## Instalación
+Dentro de pfSense 
             
-        Sistema
-            |
-        Package manager
-            |
-        Available Packages
-            |
-        Suricata 7.08_5
+    Sistema
+        |
+    Package manager
+        |
+    Available Packages
+        |
+    Suricata 7.08_5
 
 ## Configuración
 Primero destacar que debemos remover de System > Advanced > Networking. Las opciones de Hardware TCP Segmentation Offloading y Hardware Large Recieve Offloading (Activados de forma predeterminada). Esto debido a que modifican el paquete previamente y por lo tanto Suricata no lee el paquete completo sino una versión alterada.
