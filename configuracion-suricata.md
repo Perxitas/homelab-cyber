@@ -27,6 +27,7 @@ Luego, en Services > Suricata > Interfaces, añadimos una nueva interfaz, la int
 ## Prueba
 De manera inicial, un comando básico, nmap -sS -A 192.168.1.1 para obtener alertas en nuestro log de Alerts en Suricata. 
 
+
 -Se pueden observar que las primeras fueron de los paquetes ICMP para el descubrimiento de hosts, que suricata no reconoce.
 
 ![Alertas Suricata](imgs/suricata-alertas1.png)
@@ -57,9 +58,12 @@ ET-exploit
 ET-malware
 ```
 
-En la configuración de listas SID para interfaces, bajo la interfaz LAN, se colocó este archivo como la lista SID a bloquear 
+Este archivo va en la configuración de listas SID para interfaces, bajo la interfaz LAN, se colocó este archivo como la lista SID a dropear.
 
-Aquí se puede observar 
+Ejecución de Nmap desde el cliente. El estado filtered de los puertos confirma el Drop activo por parte de Suricata, aunque no impide la detección de los puertos ya abiertos por pfSense.
+![Resultado Nmap con IPS](imgs/nmap-drop0.png)
+
+Aquí se puede observar lo que suricata está dropeando del comando nmap
 ![Drops Suricata](imgs/suricata-drop0.png)
 
 ## Observaciones IPS
@@ -68,4 +72,4 @@ Aquí se puede observar
 
 ## Conclusión de transición IDS a IPS 
 La transición de IDS a IPS requiere criterio sobre qué se bloquea. En esta etapa se bloquearon las categorías ET-scan, ET-exploit y ET-malware de ETOpen pero aún falta validar que tráfico legítimo no se vea afectado eso es parte de la siguiente iteración. Debido a que saber que trafico bloquear y cual es lo que diferencia el buen uso del IPS.
-Suricata es utíl para bloquear contenido, pero aún así deja una brecha donde los usuarios aún pueden descubrir la red, se debe complementar. 
+Suricata es utíl para bloquear contenido, pero aún así deja una brecha donde los usuarios aún pueden descubrir la red, se debe complementar, pero es un paso más a la seguridad, hay que destacar que IDS permite que los paquetes maliciosos entren y finalmente se topen con el firewall el IPS en cambio es una pared en si misma que destruye el paquete al momento de detectar que un match con las reglas, el paquete no llega al firewall.
