@@ -9,10 +9,10 @@ Levantar pfSense como firewall entre internet y una red interna virtual, replica
 ```
 Internet (WAN)
      │
-  em0 ← Adaptador puente → red real del host
+  em0 Adaptador puente > red real del host
      │
   pfSense 
-  em1 ← Red interna VirtualBox 
+  em1 Red interna VirtualBox 
      │
   192.168.1.0/24
      │
@@ -21,7 +21,7 @@ Internet (WAN)
 
 ## Configuración de la VM (VirtualBox)
 
-| Parámetro |
+| Parámetro | Configuración |
 |---|---|
 | OS | FreeBSD |
 | RAM | 512 MB |
