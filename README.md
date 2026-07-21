@@ -15,7 +15,7 @@ Internet
 [pfSense Firewall] VM en VirtualBox 
    │
    ▼
-[Red interna: 192.168.1.0/24]
+[Red interna: 10.0.0.0/24]
    │
    ▼
 [Kali Linux] VM cliente para administración y pentesting
@@ -35,11 +35,12 @@ Internet
 |---|---|---|
 | 01 | [Configuración pfSense + red interna](configuracion-pfsense.md) | Completado |
 | 02 | [Suricata IDS/IPS con reglas ETOpen](configuracion-suricata.md) | Completado |
+| 03 | [Hardening reglas de firewall](configuracion-pfsense.md) | Completado |
 
 ## Objetivos a cumplir/Roadmap
 
 - [ ] Segmentación de red con VLANs
-- [ ] Reglas de firewall y hardening
+- [X] Reglas de firewall y hardening
 - [X] IDS/IPS con Suricata
 - [ ] VM vulnerable para práctica de pentesting
 - [ ] Integración con cloud (AWS VPC)
