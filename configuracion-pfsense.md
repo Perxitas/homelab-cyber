@@ -55,3 +55,25 @@ pfSense actúa como un firewall perimetral, separando la red WAN (internet) de l
 ## Próximo paso
 
 [1/3] Configurar reglas de firewall, segmentación con VLANs y añadir Suricata como IDS/IPS.
+
+## Corrección de arquitectura de red
+
+### Problema
+WAN y LAN estaban en la misma subred (192.168.1.x), causando que pfSense 
+no pudiera entender de forma correcta como funciona el tráfico y enviarlo correctamente a internet.
+
+Algo que se detectó al momento de configurar reglas de firewall y probar conectividades. 
+
+### Solución
+- Cambiar LAN de 192.168.1.1/24 a 10.0.0.1/24
+
+### Arquitectura nueva
+Internet
+    │
+Router (192.168.100.x)
+    │
+pfSense WAN (192.168.100.205)
+    │
+pfSense LAN (10.0.0.1)
+    │
+Kali (10.0.0.102)
