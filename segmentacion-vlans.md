@@ -41,3 +41,12 @@ Reglas de la interfaz LAN nativa deshabilitadas para prevenir administración no
 **Resultado del Pentest de validación:** 
 Cualquier equipo conectado a la red base sin la configuración 802.1Q específica sufre pérdida de paquetes del 100% y pierde enrutamiento hacia el firewall o internet.
 ![Prueba de Ping a LAN](imgs/kali-blackhole-ping.png)
+
+## Troubleshooting y Lecciones de Arquitectura
+
+Durante pruebas con la VLAN 10 (Usuarios) y su salida a Internet, se resolvieron los siguientes retos de diseño:
+
+1. Multihoming y Falsos Positivos en Zero Trust: Si la máquina mantiene múltiples interfaces activas (como estar conectada a la VLAN 99 y VLAN 10 a la vez), el sistema operativo enruta el tráfico localmente saltándose el firewall. Para validar el aislamiento real, se debe tener un único tag activo.
+2. Persistencia de Estados (Stateful Firewall): Al cambiar una regla de Pass a Block, el tráfico sigue fluyendo porque pfSense mantiene las conexiones activas en memoria (RAM). Fue necesario purgar la tabla manualmente (`Diagnostics > States > Reset States`) para aplicar el bloqueo.
+3. Condicionamiento del NAT Automático: El firewall no genera reglas de Outbound NAT para las nuevas VLANs si la interfaz WAN pierde comunicación de Capa 1/Capa 2 con el gateway(en el caso de cambio de adaptador de red físico en el hipervisor).
+4. Escucha de Servicios (DNS): Por defecto, el servicio Unbound DNS de pfSense solo escucha en la LAN nativa. Hubo que autorizar explícitamente a las nuevas VLANs para permitir la resolución de nombres.

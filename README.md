@@ -40,7 +40,7 @@ Internet
 
 ## Objetivos a cumplir/Roadmap
 
-- [ ] Segmentación de red con VLANs
+- [X] Segmentación de red con VLANs
 - [X] Reglas de firewall y hardening
 - [X] IDS/IPS con Suricata
 - [ ] VM vulnerable para práctica de pentesting
