@@ -36,6 +36,7 @@ Internet
 | 01 | [Configuración pfSense + red interna](configuracion-pfsense.md) | Completado |
 | 02 | [Suricata IDS/IPS con reglas ETOpen](configuracion-suricata.md) | Completado |
 | 03 | [Hardening reglas de firewall](configuracion-pfsense.md) | Completado |
+| 04 | [Segmentación con VLANs y Zero Trust (Capa 2)](segmentacion-vlans.md) | Completado |
 
 ## Objetivos a cumplir/Roadmap
 
